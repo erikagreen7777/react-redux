@@ -7,28 +7,40 @@ connect function as a wrapper around class component to The Store
 */
 import { useSelector, useDispatch } from "react-redux";
 
+//class based components with redux: https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/25600172#content
+
 const Counter = () => {
   //auatomatically manages subscription for youto store
   const counter = useSelector((state) => state.counter);
+  const showCounterToggle = useSelector((state) => state.showCounter);
+
 
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
-    dispatch({type: 'increment'});
+    dispatch({ type: "increment" });
+  };
+
+  const increaseHandler = () => {
+    dispatch({ type: "increase", amount: 5 });
   };
 
   const decrementHandler = () => {
-    dispatch({type: 'decrement'});
+    dispatch({ type: "decrement" });
   };
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    dispatch({ type: "toggleCounter" });
+
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      <div className={classes.value}>{showCounterToggle && counter}</div>
       <div>
         <button onClick={incrementHandler}>Increment</button>
+        <button onClick={increaseHandler}>Increase by 5</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>

@@ -1,5 +1,5 @@
 import classes from "./Counter.module.css";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
 /*
 there's a useStore custom hook from the redux team as well that gives you direct access to The Store
 but useSelector is a bit more convenient to use because you can automatically select 
@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Counter = () => {
   //auatomatically manages subscription for youto store
-  const counter = useSelector((state) => state.counter);
-  const showCounterToggle = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounterToggle = useSelector((state) => state.counter.showCounter);
 
   const dispatch = useDispatch();
 

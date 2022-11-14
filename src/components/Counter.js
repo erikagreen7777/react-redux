@@ -1,4 +1,5 @@
 import classes from "./Counter.module.css";
+import { counterActions } from "../store";
 /*
 there's a useStore custom hook from the redux team as well that gives you direct access to The Store
 but useSelector is a bit more convenient to use because you can automatically select 
@@ -14,24 +15,22 @@ const Counter = () => {
   const counter = useSelector((state) => state.counter);
   const showCounterToggle = useSelector((state) => state.showCounter);
 
-
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "increase", amount: 5 });
+    dispatch(counterActions.increase(5)); // { type: UNIQUEID, payload: <whaever you pass>}
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggleCounter" });
-
+    dispatch(counterActions.toggleCounter());
   };
 
   return (

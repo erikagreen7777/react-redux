@@ -1,6 +1,6 @@
 import { ReactReduxContext } from "react-redux";
-import { createStore } from "redux";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configure } from "@testing-library/react";
 
 const initialState = { counter: 0, showCounter: true };
 
@@ -18,15 +18,20 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase(state, action) {
-    //   state.counter = state.counter + action.amount;
-    state.counter += action.amount
+      //   state.counter = state.counter + action.amount;
+      state.counter += action.payload; // <---- payload is from redux, 
     },
     toggleCounter(state) {
-        state.showCounter = !state.showCounter
+      state.showCounter = !state.showCounter;
     },
   },
 });
 
-const store = createStore(counterSlice.reducer);
+const store = configureStore({
+  //the value for reducer can be a single reducer, but if you have multiple slices, we coould set an object with any key/props with different reducers
+  reducer: counterSlice.reducer,
+});
+
+export const counterActions = counterSlice.actions;
 
 export default store;
